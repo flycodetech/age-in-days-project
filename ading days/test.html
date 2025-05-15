@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+var isValid = function(s) {
+    let stack = [];
+    let map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+
+    for (let char of s) {
+        if (char in map) {  // If it's a closing bracket
+            if (stack.length === 0 || stack.pop() !== map[char]) {
+                return false;  // No matching opening bracket or incorrect order
+            }
+        } else {
+            stack.push(char);  // Push opening bracket onto stack
+        }
+    }
+
+    return stack.length === 0;  // If stack is empty, it's valid
+};
+
+// Test cases
+let testCases = ["()", "()[]{}", "(]", "([)]", "{[]}"];
+
+testCases.forEach(s => {
+    console.log(`${s} -> ${isValid(s) ? "valid" : "invalid"}`);
+});
+
+var isValid = function(s) {
+    let stack = [];  // Stack to store open brackets
+    let map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+
+    for (let char of s) {  // Iterate through each character
+        if (char in map) {  // If it's a closing bracket
+            if (stack.length === 0 || stack.pop() !== map[char]) {
+                return false;  // No matching opening bracket or incorrect order
+            }
+        } else {
+            stack.push(char);  // Push opening bracket onto stack
+        }
+    }
+
+    return stack.length === 0;  // If stack is empty, it's valid
+};
+
+let s = readline();  // Read input
+
+if (isValid(s)) console.log("valid");
+else console.log("invalid");
+
+var isValid = function(s) {
+    let stack = [];
+    let map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+
+    for (let char of s) {
+        if (char in map) {  // If it's a closing bracket
+            if (stack.length === 0 || stack.pop() !== map[char]) {
+                return false;  // No matching opening bracket or incorrect order
+            }
+        } else {
+            stack.push(char);  // Push opening bracket onto stack
+        }
+    }
+
+    return stack.length === 0;  // If stack is empty, it's valid
+};
+
+// Test cases
+ testCases = ["()", "()[]{}", "(]", "([)]", "{[]}"];
+
+testCases.forEach(s => {
+    console.log(`${s} -> ${isValid(s) ? "valid" : "invalid"}`);
+});
+
+var removeInvalidParentheses = function(s) {
+    let queue = new Set([s]), res = [], found = false;
+    
+    while (queue.size) {
+        let next = new Set();
+        for (let str of queue) {
+            if (isValid(str)) {
+                res.push(str);
+                found = true;
+            }
+            if (found) continue;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] !== '(' && str[i] !== ')') continue;
+                next.add(str.slice(0, i) + str.slice(i + 1));
+            }
+        }
+        if (found) break;
+        queue = next;
+    }
+    
+    return res;
+};
+
+function isValid(s) {
+    let balance = 0;
+    for (let char of s) {
+        if (char === '(') balance++;
+        if (char === ')') balance--;
+        if (balance < 0) return false;
+    }
+    return balance === 0;
+}
+
+var longestValidParentheses = function(s) {
+    let stack = [-1], maxLen = 0;
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '(') stack.push(i);
+        else {
+            stack.pop();
+            if (stack.length) {
+                maxLen = Math.max(maxLen, i - stack[stack.length - 1]);
+            } else {
+                stack.push(i);
+            }
+        }
+    }
+    
+    return maxLen;
+};
+
+var checkValidString = function(s) {
+    let leftMin = 0, leftMax = 0;
+    
+    for (let char of s) {
+        if (char === '(') {
+            leftMin++;
+            leftMax++;
+        } else if (char === ')') {
+            leftMin = Math.max(leftMin - 1, 0);
+            leftMax--;
+        } else { // '*'
+            leftMin = Math.max(leftMin - 1, 0);
+            leftMax++;
+        }
+        
+        if (leftMax < 0) return false;
+    }
+    
+    return leftMin === 0;
+};
+
+var generateParenthesis = function(n) {
+    let res = [];
+    
+    function backtrack(str, open, close) {
+        if (str.length === 2 * n) {
+            res.push(str);
+            return;
+        }
+        if (open < n) backtrack(str + "(", open + 1, close);
+        if (close < open) backtrack(str + ")", open, close + 1);
+    }
+    
+    backtrack("", 0, 0);
+    return res;
+};
+
+
+    </script>
+</body>
+</html>

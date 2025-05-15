@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <input id="me" type="datetime" placeholder="datetime"  >
+
+     <script>
+         var datetime = prompt("Please Enter your dte of birth ");
+         if(datetime < 11 ){
+            return (datetime +"" + "," +" Good morning " + "  ❤" + " what is your schedule for today ");
+         }else{
+            return("plese enter your dte of birth")
+         }
+         document.getElementById("me").innerHTML = greetUser();
+     </script>
+
+</body>
+</html>  

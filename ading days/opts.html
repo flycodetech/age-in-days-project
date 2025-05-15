@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+      
+      var isValid = function(s) {
+    let stack = [];  // Stack to store open brackets
+    var s = readline();  // Read input
+    let map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+
+    for (let char of s) {  // Iterate through each character
+        if (char in map) {  // If it's a closing bracket
+            if (stack.length === 0 || stack.pop() !== map[char]) {
+                return false;  // No matching opening bracket or incorrect order
+            }
+        } else {
+            stack.push(char);  // Push opening bracket onto stack
+        }
+    }
+
+    return stack.length === 0;  // If stack is empty, it's valid
+};
+
+
+
+if (isValid(s)) console.log("valid");
+else console.log("invalid");
+
+
+
+
+    </script>
+</body>
+</html>

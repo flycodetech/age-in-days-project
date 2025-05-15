@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text weed</title>
+</head>
+<body>
+    <script>
+        /* @param {string[]} ops - List of operations
+ * @return {number} - Sum of scores after performing all operations
+ */
+var calPoints = function(ops) {
+    let stack = [];
+
+    for (let op of ops) {
+        if (!isNaN(op)) {
+            stack.push(parseInt(op));
+        } else if (op === "+") {
+            let top = stack.pop();
+            let newScore = top + stack[stack.length - 1];
+            stack.push(top);
+            stack.push(newScore);
+        } else if (op === "D") {
+            stack.push(2 * stack[stack.length - 1]);
+        } else if (op === "C") {
+            stack.pop();
+        }
+    }
+
+    return stack.reduce((sum, score) => sum + score, 0);
+};
+
+// Example Test Case
+console.log(calPoints(["5", "2", "C", "D", "+"])); // Output: 30
+    </script>
+</body>
+</html>
